@@ -27,6 +27,11 @@ nvcc fractal.cu -o fractal_cu
 ./fractal_cu 4096 2160 120
 ```
 
+## To convert output to GIF
+```bash
+convert -delay 1x30 fractal*.bmp fractal.gif
+```
+
 ## Reference
 Original C++ code by Martin Burtscher, Texas State University
 
