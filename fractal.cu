@@ -38,8 +38,8 @@ __global__ void compute_frames(double aspect_ratio, int width, int height, int n
 
   if (col <= width && row <= height) {
     
-    const double cy = y0 + row * dy;
-    const double cx = x0 + col * dx;
+    const double cy = fma(dy, row, y0);
+    const double cx = fma(dx, col, x0);
 
     double x = cx;
     double y = cy;
@@ -55,13 +55,8 @@ __global__ void compute_frames(double aspect_ratio, int width, int height, int n
       x = x2-y2+cx;
       depth--;
     } while ((depth > 0) && ((x2+y2) < 5.0));
-
-
-    // picture_array[frame_index * height * width + row * width + col] = (unsigned char) depth;
     picture_array[frame_index * height * width + row * width + col] = (unsigned char) depth;
-
   }
-    
 }
 
 int main(int argc, char *argv[]) {
